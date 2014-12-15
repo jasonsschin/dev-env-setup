@@ -19,6 +19,7 @@ class chincorp-role::dev {
     include chincorp-profile::applications::cmder
     include chincorp-profile::applications::sublimetext2
     include chincorp-profile::applications::linqpad4
+    include chincorp-profile::applications::markdownpad2
 
     include chincorp-profile::feature::iis
     
