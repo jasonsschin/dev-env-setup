@@ -1,0 +1,8 @@
+*.msi
+*.iso
+*.nupkg
+/data/packages
+/data/chocinstall
+.vagrant/*
+.DS_Store
+*.nuspec
