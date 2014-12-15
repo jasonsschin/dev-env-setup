@@ -1,0 +1,14 @@
+{
+  "name": "chincorp-role",
+  "version": "0.0.1",
+  "author": "Jason Chin",
+  "summary": "Role module",
+  "license": "Apache 2.0",
+  "source": "N/A",
+  "project_page": "Home",
+  "issues_url": "The interwebs",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+

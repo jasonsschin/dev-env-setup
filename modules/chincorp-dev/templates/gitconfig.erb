@@ -1,0 +1,68 @@
+[credential]
+    helper = !'C:\\Users\\vagrant\\AppData\\Roaming\\GitCredStore\\git-credential-winstore.exe'
+# Use P4merge as diff and mergetool of choice
+[merge]
+    tool = p4merge
+[mergetool "p4merge"]
+    path = C:/Program Files/Perforce/p4merge.exe
+    cmd = \"c:/Program Files/Perforce/p4merge.exe\" \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[mergetool]
+    # I dont want to keep .orig files on the file system once I've done my merge
+    keepbackup = false
+[difftool]
+    external = p4diff.sh
+    # dont ask me if I want to open p4merge - just open it
+    prompt = false
+
+[core]
+    # use vi for basic editing of comments etc
+    editor = vi
+    autocrlf = true
+    excludesfile = \\\\psf\\Home\\Documents\\gitignore_global.txt
+
+# By default, trying to push without explcit arguments will push to the upstream branch of the branch that you are working on
+[push]
+    default = upstream
+# my user info
+[user]
+    name = Jason Chin
+    email = jason.chin@smsmt.com
+
+# always use no fast forward when merging dev and master
+[branch "master"]
+mergeoptions = --no-ff
+[branch "dev"]
+mergeoptions = --no-ff
+
+
+[alias]
+    st = status
+    co = checkout
+    fo = fetch origin
+    pod = push origin dev
+    mod = merge origin/dev
+
+    # show log in an output that I like
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(yellow)<%an>%Creset' --abbrev-commit --date=relative
+
+    # show commits which contain code matching a regex pattern. To show the code too add -p
+    # eg 'git lgsearch .+Parse.+' or 'git lgsearch .+Parse.+ -p'
+    lgsearch = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(yellow)<%an>%Creset' --abbrev-commit --date-order HEAD --all --pickaxe-regex -S
+
+    # show a log of commits that I have made but not pushed. By default compares current branch to its origin. Can give an arg to tell it to compare to wherever.
+    # eg 'git lgm' or 'git lgm origin/master'
+    lgm = "!f() { if [ -z "$1" ]; then { current=$(git rev-parse --abbrev-ref HEAD); git lg origin/$current..HEAD; } else { git lg $1..HEAD; } fi }; f"
+
+    # show a log of commits that I do not have in my branch. By default compares current branch to its origin. Can give an arg to tell it to compare to wherever.
+    lgt = "!f() { if [ -z "$1" ]; then { current=$(git rev-parse --abbrev-ref HEAD); git lg HEAD..origin/$current; } else { git lg HEAD..$1; } fi }; f"
+
+    # same as for logs above, but using whatchanged rather than log
+    wcm = "!f() { if [ -z "$1" ]; then { current=$(git rev-parse --abbrev-ref HEAD); git whatchanged origin/$current..HEAD; } else { git whatchanged $1..HEAD; } fi }; f"
+    wct = "!f() { if [ -z "$1" ]; then { current=$(git rev-parse --abbrev-ref HEAD); git whatchanged HEAD..origin/$current; } else { git whatchanged HEAD..$1; } fi }; f"
+
+    # show simple diff on command line
+    df = diff
+    # show diff in p4 merge
+    dt = difftool
+    # use when you have added something to the staging area and want to diff it
+    dtc = difftool --cached

@@ -1,0 +1,1 @@
+include chincorp-profile::utilities::adobereader

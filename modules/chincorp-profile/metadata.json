@@ -1,0 +1,14 @@
+{
+  "name": "chincorp-profile",
+  "version": "0.0.1",
+  "author": "Jason Chin",
+  "summary": "Profile module",
+  "license": "Apache 2.0",
+  "source": "N/A",
+  "project_page": "The interwebs",
+  "issues_url": "Home",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+
