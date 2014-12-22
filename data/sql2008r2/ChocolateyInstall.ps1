@@ -53,7 +53,7 @@ Write-Debug "SQL Setup file path: $setupFilePath"
 Write-Debug "Turn off application compatability checking for SQL 2008 R2..."
 
 if ((Test-RegistryValue $appCompatRegLocation $appCompatRegKey) -eq $false){
-    Write-Debug "Adding compatability registry value ..." -ForegroundColor Green
+    Write-Debug "Adding compatability registry value ..."
     Set-ItemProperty -Path $appCompatRegLocation -Name $appCompatRegKey -Value $appCompatRegValue -Type DWord
 }
 
