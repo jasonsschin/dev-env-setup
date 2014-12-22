@@ -59,4 +59,32 @@ class chincorp-dev {
       content => template('chincorp-dev/gitconfig.erb')
     }
 
+    winconfig::esc { 'esc':
+      ensure  => 'disabled'
+    }
+
+    winconfig::uac { 'uac':
+      ensure  => 'disabled'
+    }
+
+    winconfig::exploreroptions { 'showhiddenfilesfoldersdrives':
+      ensure  => 'present',
+      option  => 'showhiddenfilesfoldersdrives'
+    }
+
+    winconfig::exploreroptions { 'hidefileext':
+      ensure  => 'present',
+      option  => 'hidefileext'
+    }
+
+    winconfig::exploreroptions { 'showsuperhidden':
+      ensure  => 'present',
+      option  => 'showsuperhidden'
+    }
+
+    winconfig::exploreroptions { 'fullpath':
+      ensure  => 'present',
+      option  => 'fullpath'
+    }
+
 }
