@@ -20,8 +20,8 @@ class chincorp-role::dev {
     include chincorp-profile::applications::sublimetext2
     include chincorp-profile::applications::linqpad4
     include chincorp-profile::applications::markdownpad2
-
-    include chincorp-profile::feature::iis
+    include chincorp-profile::applications::visualstudio2013ultimate
+    include chincorp-profile::applications::sql2008r2
     
     include chincorp-dev
 }
