@@ -6,11 +6,11 @@
     <SelectableItemCustomization Id="LightSwitch" Hidden="no" Selected="no" />
     <SelectableItemCustomization Id="VC_MFC_Libraries" Hidden="no" Selected="no" />
     <SelectableItemCustomization Id="OfficeDeveloperTools" Hidden="no" Selected="no" />
-    <SelectableItemCustomization Id="SQL" Hidden="no" Selected="no" />
+    <SelectableItemCustomization Id="SQL" Hidden="no" Selected="yes" />
     <SelectableItemCustomization Id="WebTools" Hidden="no" Selected="yes" />
     <SelectableItemCustomization Id="Win8SDK" Hidden="no" Selected="yes" />
     <SelectableItemCustomization Id="SilverLight_Developer_Kit" Hidden="no" Selected="no" />
-    <SelectableItemCustomization Id="WindowsPhone80" Hidden="no" Selected="no" />
+    <SelectableItemCustomization Id="WindowsPhone80" Hidden="no" Selected="yes" />
     <SelectableItemCustomization Id="BlissHidden" Selected="yes" />
     <SelectableItemCustomization Id="HelpHidden" Selected="yes" />
     <SelectableItemCustomization Id="IntelliTraceUltimateHidden" Selected="yes" />

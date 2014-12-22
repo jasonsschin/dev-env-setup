@@ -22,7 +22,7 @@ $installapp = Join-Path "$driveLetter" "vs_ultimate.exe"
 
 Write-Host "Installing Visual Studio 2013 ..."
 
-Install-ChocolateyPackage 'VisualStudio2013Ultimate' 'exe' $installerArgs "file://$installapp"
+Install-ChocolateyInstallPackage 'VisualStudio2013Ultimate' 'exe' $installerArgs "file://$installapp"
 
 Write-Host "Cleaning up ..."
 
