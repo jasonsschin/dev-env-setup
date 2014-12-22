@@ -1,7 +1,7 @@
 ﻿
 Write-Host "Copying file Visual Studio Update 4 file to c:\tmp ..."
 
-Copy-Item C:\vagrant_data\vs2013.4.iso C:\tmp
+Copy-Item C:\vagrant_data\vs2013.4\vs2013.4.iso C:\tmp
 
 
 Write-Host "Mounting Visual Studio Update 4 iso ..."
@@ -12,7 +12,7 @@ $installPath = Join-Path $setupDriveLetter VS2013.4.exe
 
 Write-Host "Installing Visual Studio Update 4..."
 
-Install-ChocolateyPackage `
+Install-ChocolateyInstallPackage `
 	'VS2013.4.exe' 'exe' "/Passive /NoRestart /Log $($env:temp)\VS20134.log" `
 	"file:/$installPath" -validExitCodes @(0,3010)
 
