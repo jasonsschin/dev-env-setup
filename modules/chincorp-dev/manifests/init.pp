@@ -45,6 +45,12 @@ class chincorp-dev {
       logoutput => true
     }
 
+    exec { 'change_desktop_background':
+      command   => "Set-ItemProperty 'HKCU:\\Control Panel\\Colors' -Name Background -Value '116 164 2'",
+      provider  => powershell,
+      logoutput => true
+    }
+
     $template = "netrc.erb"
 
     file { 'netrc':
@@ -64,7 +70,7 @@ class chincorp-dev {
     }
 
     winconfig::uac { 'uac':
-      ensure  => 'disabled'
+      ensure  => 'enabled'
     }
 
     winconfig::exploreroptions { 'showhiddenfilesfoldersdrives':
