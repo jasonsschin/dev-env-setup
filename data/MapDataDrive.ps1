@@ -1,0 +1,1 @@
+net use d: \\psf\data /persistent:Yes
