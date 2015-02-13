@@ -11,7 +11,7 @@ end
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "vagrant-windows-81"
-  config.vm.box = "chincorp/windows-81"
+  config.vm.box = "chincorp/windows-8.1"
   config.vm.boot_timeout = 400
   config.vm.guest = :windows
   config.vm.communicator = "winrm"
@@ -19,6 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "VM-DEV14"
 
   # forward RDP and WINRS ports
+  config.vm.network "public_network", bridge: "en1"
   config.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
   config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
   config.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", auto_correct: true
@@ -38,30 +39,27 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider "parallels" do |v|
     v.name = "VM-DEV14"
     v.update_guest_tools = true
-    v.optimize_power_consumption = false
+    v.optimize_power_consumption = true
     v.memory = 8192
     v.cpus = 2
   end
 
-  # for provisioning we need:
-  # chocolatey:
-  config.vm.provision :shell, path: "./data/InstallChocolatey.ps1"
+  # Restart to register Windows Firewall & registry settings
+  config.vm.provision :shell, inline: 'Restart-Computer -Force'
 
-  # ...in the path for all users:
-  config.vm.provision :shell, inline: '[Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\ProgramData\Chocolatey\bin", "Machine")'
+  config.vm.provision :shell, path: "./data/ConfigureRemotingForAnsible.ps1"
 
-  # Puppet:
-  #config.vm.provision :shell, path: "./data/InstallPuppetFromMsi.ps1"
-  config.vm.provision :shell, inline: 'choco install puppet -version 3.7.2'
+  config.vm.provision :ansible do |ansible|
+    ansible.playbook = "./ansible/playbook.yml"
 
-  config.vm.provision :puppet do |puppet|
-    puppet.manifests_path = "manifests"
-    puppet.module_path = "modules"
-    puppet.manifest_file = "init.pp"
-    puppet.options = "--verbose --debug"
+    ansible.extra_vars = {
+      ansible_ssh_user: 'vagrant',
+      ansible_ssh_pass: "vagrant",
+      ansible_ssh_port: 5986,
+      ansible_connection: "winrm"
+    }
+    #ansible.verbose = "vvvv"
   end
 
-  # Restart the machine having changed the hostname:
-  config.vm.provision :shell, inline: "Restart-Computer"
 
 end

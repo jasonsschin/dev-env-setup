@@ -1,0 +1,109 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: SCRIPT - Disable windows update
+      script: ../data/DisableWindowsUpdate.ps1
+    - name: SCRIPT - Configure development environment settings
+      script: ../data/DevelopmentEnvironmentSettings.ps1
+    - name: SCRIPT - Configure new DVD-ROM to drive mapping
+      script: ../data/change_cdrom_mapping.ps1
+    - name: SCRIPT - Data drive mapping
+      script: ../data/MapDataDrive.ps1
+    - name: SCRIPT - Enable .NET 3.5 Feature
+      script: ../data/InstallDotNet35.ps1
+    - name: SCRIPT - Enable IIS Feature
+      script: ../data/InstallIIS.ps1
+    - name: COPY - _netrc file to user directory
+      win_copy:
+        src: c:/vagrant_data/_netrc
+        dest: c:/users/vagrant/
+        original_basename: _netrc
+    - name: COPY - .gitconfig file to user directory
+      win_copy:
+        src: c:/vagrant_data/gitconfig
+        dest: c:/users/vagrant/
+        original_basename: .gitconfig
+    - name: PACKAGE - Install Sublime Text 2
+      win_chocolatey:
+        name: sublimetext2
+        state: present
+    - name: PACKAGE - Install Cmder
+      win_chocolatey:
+        name: cmder
+        state: present
+    - name: PACKAGE - Install Git
+      win_chocolatey:
+        name: git
+        state: present
+    - name: PACKAGE - Install 7zip
+      win_chocolatey:
+        name: 7zip
+        state: present
+    - name: PACKAGE - Install poshgit
+      win_chocolatey:
+        name: poshgit
+        state: present
+    - name: PACKAGE - Install webpi
+      win_chocolatey:
+        name: webpi
+        state: present
+    - name: PACKAGE - Install Windows Azure Powershell
+      win_chocolatey:
+        name: windowsazurepowershell
+        state: present
+    - name: PACKAGE - Install Ruby
+      win_chocolatey:
+        name: ruby
+        state: present
+    - name: PACKAGE - Install ruby.devkit
+      win_chocolatey:
+        name: ruby.devkit
+        state: present
+    - name: PACKAGE - Install fiddler4
+      win_chocolatey:
+        name: fiddler4
+        state: present
+    - name: PACKAGE - Install dotpeek
+      win_chocolatey:
+        name: dotpeek
+        state: present
+    - name: PACKAGE - Install googlechrome
+      win_chocolatey:
+        name: googlechrome
+        state: present
+    - name: PACKAGE - Install sourcetree
+      win_chocolatey:
+        name: sourcetree
+        state: present
+    - name: PACKAGE - Install p4merge
+      win_chocolatey:
+        name: p4merge
+        state: present
+    - name: PACKAGE - Install resharper
+      win_chocolatey:
+        name: resharper
+        state: present
+    - name: PACKAGE - Install linqpad4
+      win_chocolatey:
+        name: linqpad4
+        state: present
+    - name: PACKAGE - Install adobereader
+      win_chocolatey:
+        name: adobereader
+        state: present
+    - name: PACKAGE - Install Visual Studio 2013 Ultimate
+      win_chocolatey:
+        name: visualstudio2013ultimate
+        state: present
+        source: C:/vagrant_data/vs2013/
+    - name: PACKAGE - Install Visual Studio 2013 Update 4
+      win_chocolatey:
+        name: vs2013.4
+        state: present
+        source: C:/vagrant_data/vs2013.4/
+    - name: PACKAGE - Install SQL 2014 Developer
+      win_chocolatey:
+        name: sql2014
+        state: present
+        source: C:/vagrant_data/sql2014/
